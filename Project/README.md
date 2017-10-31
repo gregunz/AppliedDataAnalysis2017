@@ -12,7 +12,7 @@ As an individual it is really hard to grasp a broad view of our world. Each medi
 
 # Dataset
 
-We plan to use the GDELT Project datasets and even though they are very complete, we could add categories for each event so that we can have custom filters later. 
+We plan to use the GDELT Project datasets and even though they are very complete, we could add categories for each event so that we can have custom filters later. For each event, the source is provided as a set of URLs and we could crawl those URLs to collect more data if necessary. Even though the complete dataset is very large, it is not a problem because it is partitionned into smaller datasets where each dataset represents the data for a specific day/month/year.
 
 List the dataset(s) you want to use, and some ideas on how do you expect to get, manage, process and enrich it/them. Show us you've read the docs and some examples, and you've a clear idea on what to expect. Discuss data size and format if relevant.
 
