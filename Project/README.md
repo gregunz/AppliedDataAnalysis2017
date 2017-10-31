@@ -1,8 +1,8 @@
-# What are the inequalities present online regarding the media coverage geographically
+## How do conflicts propagate through media depending on their geolocation
 
 # Abstract
-A 150 word description of the project idea, goals, dataset used. What story you would like to tell and why? What's the motivation behind your project?
-</br> In this project, we show how inequal we are to media coverage using the GDELT Project and the UCDP datasets coupled with the Wikipedia and Twitter datasets.
+
+As an individual it is really hard to grasp a broad view of our world. Each media usually focuses on news related to its geolocation, political orientation or public of interest, each giving its own representation of the world. By merging them altogether, we are able to get a more accurate and authentic view. Using GDELT project, such diversity of media sources is available and aggregated for conflicts all around the world. This enables us to quantify and visualize the propagation of the news related to any conflict.
 
 # Research questions
 A list of research questions you would like to address during the project. 
