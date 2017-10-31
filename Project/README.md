@@ -26,6 +26,7 @@ GDELT dataset
 # A list of internal milestones up until project milestone 2
 
 |Week #|Expected task|
+|---|---|
 |Week 1<br>31.10-07.11|Aggregate some sample data|
 |Week 2<br>07.11-14.11|Visualize it on a world map|
 |Week 3<br>14.11-21.11|Filter events by their types|
