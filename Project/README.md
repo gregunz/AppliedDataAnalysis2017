@@ -27,7 +27,7 @@ GDELT dataset
 3. Filter events by their types 
 4. Detect patterns 
 
-<s>Add here a sketch of your planning for the next project milestone.
+<s>Add here a sketch of your planning for the next project milestone.</s>
 
 # Questions for TAs
 
