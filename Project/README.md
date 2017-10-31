@@ -10,7 +10,7 @@ We wish to answer the following questions:
 - Can we show how information about a particular event spread on the map ?
 - How does it evolve throughout time ? (e.g. with internet, information travel quicker and broader)
 - *Can we use machine learning to predict the spread of a conflict?
-* will depend on results and progress of previous questions
+\* will depend on results and progress of previous questions
 # Dataset
 We plan to use the GDELT Project datasets.
 Even though, the datasets are quite complete, we can add categories for each event in order to be able to use custom filters later. How ? For each event, the source is provided as a set of URLs and we can crawl those URLs to collect more data.
@@ -21,6 +21,7 @@ The complete dataset is very large but very well structured and partitioned into
 - NumSources: Number of sources the events is mentioned in.
 - SOURCEURL: Array of the sources’ URLs.
 - And many others
+
 (information taken from http://data.gdeltproject.org/documentation/GDELT-Data_Format_Codebook.pdf)
 # A list of internal milestones up until project milestone 2
 |Week #|Internal Milestones|
