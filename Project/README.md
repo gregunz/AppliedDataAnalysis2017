@@ -33,8 +33,8 @@ The complete dataset is very large but very well structured and partitioned into
 |Week 3<br/>14.11-21.11|Visualize some of our data on a world map.|
 |Week 4<br/>21.11-28.11|Visualize the spread over time of an event on a world map.|
 # Questions for TAs
-Can we update our planning for the next milestone depending on the difficulties encountered ?
-Can we focus on some particular countries and then extends if time permits?
-Do you think our goals are too broad and we should focus on a more specific task?
-Is the project complexity and size what you expect from us? Is It too complex? not enough?
+- Can we update our planning for the next milestone depending on the difficulties encountered ?
+- Can we focus on some particular countries and then extends if time permits?
+- Do you think our goals are too broad and we should focus on a more specific task?
+- Is the project complexity and size what you expect from us? Is It too complex? not enough?
 
