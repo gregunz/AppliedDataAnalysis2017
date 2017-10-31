@@ -2,11 +2,13 @@
 
 # Abstract
 
-As an individual it is really hard to grasp a broad view of our world. Each media usually focuses on news influenced by its geolocation, political orientation, public of interest or many other variables. Hence, they all provide a biased representation of the world. By merging them altogether, we are able to get a more accurate and authentic view. Using GDELT Project, such diversity of media sources is available and aggregated all around the world. Those datasets enable us to quantify and geolocally visualize the propagation of news related to any specific event.
+As an individual it is really hard to grasp a broad view of our world. Each media usually focuses on news influenced by its geolocation, political orientation, public of interest or many other variables. Hence, they all provide a biased representation of the world. By merging them altogether, we are able to get a more accurate and authentic view. Using GDELT Project, such diversity of media sources is available, it is focused on conflits and it aggregates data from all around the world. Those datasets enable us to quantify and visualize the distribution of conflictual events by regions or patterns.
 
 # Research questions
 
-How is the distribution of any events in the different region of the world ? Are there inequalities between those region regarded to any event type or to their coverage by the media ?
+- How is the distribution of any events in the different regions of the world ?
+- Are there inequalities between those regions regarded to any event type or to their coverage by the media ?
+- Can we distinguish patterns while aggregating the data, does it evolve thoughout time ?
 
 # Dataset
 
@@ -16,6 +18,7 @@ List the dataset(s) you want to use, and some ideas on how do you expect to get,
 
 # A list of internal milestones up until project milestone 2
 
+1. Aggregate some sample data
 
 Add here a sketch of your planning for the next project milestone.
 
