@@ -90,7 +90,7 @@ The complete dataset is very large but very well structured and partitioned into
 |---|---|
 |Week 5<br/>28.11-05.12|Finish the crawling on the news website and setup the website for the visualisations|
 |Week 6<br/>05.12-12.12|Finalize the different maps|
-|Week 7<br/>12.12-19.12|Stick all the peices together|
+|Week 7<br/>12.12-19.12|Stick all the pieces together|
 
 ### Questions for TAs (Milestone 1) with answers
 - *Can we update our planning for the next milestone depending on the difficulties encountered ?* Absolutely
