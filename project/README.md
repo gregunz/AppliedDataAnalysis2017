@@ -85,6 +85,13 @@ The complete dataset is very large but very well structured and partitioned into
 |Week 3<br/>14.11-21.11|~~Visualize some of our data on a world map.~~ Done|
 |Week 4<br/>21.11-28.11|~~Visualize the spread over time of an event on a world map.~~ Goal changed|
 
+### A list of internal milestones up until project milestone 3 (The end)
+|Week #|Internal Milestones|
+|---|---|
+|Week 5<br/>28.11-05.12|Finish the crawling on the news website and setup the website for the visualisations|
+|Week 6<br/>05.12-12.12|Finalize the different maps|
+|Week 7<br/>12.12-19.12|Stick all the peices together|
+
 ### Questions for TAs (Milestone 1) with answers
 - *Can we update our planning for the next milestone depending on the difficulties encountered ?* Absolutely
 - *Can we focus on some particular countries and then extends if time permits?* This is a reasonable approach btw
