@@ -19,9 +19,6 @@ Summary of what each file does :
 - Filter data we don't use
 - Clean the Gdelt data
 
-### [download_all_gdelt_data.ipynb] -- (jupyter notebook)
-- Download all the Gdelt Events (2.0) data (200k files = 100GB uncompressed)
-
 ### [fetch_gdelt_data.py] -- (python code functions)
 - Download/Save/Load Gdelt data given dates
 
@@ -31,6 +28,9 @@ Summary of what each file does :
 ### [fetch_source_country.py] -- (python code functions)
 - Find the country of the sources (newspapers/websites) 
 
+
+### Note
+All the Gdelt Events (2.0) data represent 200k files, 100GB uncompressed
 
 [data_pipeline_img]: https://raw.githubusercontent.com/gregunz/ada2017/master/project/data/images/data_pipeline.png "data pipeline"
 [gdelt_download_link]: http://data.gdeltproject.org/gdeltv2/masterfilelist.txt
