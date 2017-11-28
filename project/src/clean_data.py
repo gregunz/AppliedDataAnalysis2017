@@ -1,6 +1,7 @@
 import pandas as pd
 import datetime
 from fetch_gdelt_data import *
+from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_country_dict
 from fetch_location import get_mapping
 import re
 
