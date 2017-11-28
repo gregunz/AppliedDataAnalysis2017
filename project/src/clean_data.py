@@ -39,7 +39,8 @@ def get_countries_for_dataframe(df, column_name, website_dict, tld_dict):
             return 'NOWEBSITE'
         else:
             url_pair = url_pair[0]
-
+            
+            
         #Try 1: website matching
         country = website_dict.get(url_pair[0], "NOENTRY")
 
