@@ -4,6 +4,7 @@ from fetch_gdelt_data import *
 from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_country_dict
 from fetch_location import get_mapping
 import re
+<<<<<<< HEAD
 import requests
 
 def clean_df(dataframe):
@@ -25,6 +26,25 @@ def clean_df(dataframe):
     dataframe['Country_Name'] = dataframe['Country_Code'].apply(lambda x: d[x] if x in d else 'None')
     
     return dataframe
+=======
+
+default_column_names = [
+    'EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
+    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone','NumMentions', 'NumSources',
+    'NumArticles', 'ActionGeo_Type', 'Day'
+]
+
+def clean_df(df, column_names=default_column_names):
+    df = df[]
+    df = df.dropna(axis=0, how='any')
+    mapping = get_mapping(df).set_index('ActionGeo_CountryCode')
+    f = lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None'
+    df['Country_Code'] = df['ActionGeo_CountryCode'].apply(f)
+    df['Country_Source'] = get_countries_for_dataframe(
+        df, 'SOURCEURL', get_tld_to_country_dict(), get_all_newspapers_to_country_dict()
+    )
+    return df
+>>>>>>> a84a69830dd2624bb82d9454107e05fd3b983f66
 
 
 def clean_url(url):
