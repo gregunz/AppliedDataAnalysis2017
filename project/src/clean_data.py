@@ -5,16 +5,22 @@ from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_
 from fetch_location import get_mapping
 import re
 
+default_column_names = [
+    'EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
+    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone','NumMentions', 'NumSources',
+    'NumArticles', 'ActionGeo_Type', 'Day'
+]
 
-def clean_df(dataframe):
-    dataframe = dataframe[['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
-                           'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
-                           'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']]
-    dataframe = dataframe.dropna(axis=0, how='any')
-    mapping = get_mapping(dataframe).set_index('ActionGeo_CountryCode')
-    dataframe['Country_Code'] = dataframe['ActionGeo_CountryCode'].apply(lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None')
-    dataframe['Country_Source'] = get_countries_for_dataframe(dataframe, 'SOURCEURL', get_tld_to_country_dict(), get_all_newspapers_to_country_dict())
-    return dataframe
+def clean_df(df, column_names=default_column_names):
+    df = df[]
+    df = df.dropna(axis=0, how='any')
+    mapping = get_mapping(df).set_index('ActionGeo_CountryCode')
+    f = lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None'
+    df['Country_Code'] = df['ActionGeo_CountryCode'].apply(f)
+    df['Country_Source'] = get_countries_for_dataframe(
+        df, 'SOURCEURL', get_tld_to_country_dict(), get_all_newspapers_to_country_dict()
+    )
+    return df
 
 def get_countries_for_dataframe(df, column_name, website_dict, tld_dict):
     """Take a dataframe and return the country associated to the url in the column_name column
