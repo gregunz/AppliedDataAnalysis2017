@@ -29,7 +29,7 @@ After data acquisition, the questions we wished to answer were updated as follow
 
 **Update from Milestone 1**
 
-We first planned to go with GDELT 1.0 but we finally chose to use 2.0
+We first planned to go with GDELT 1.0 but we finally chose to use 2.0.
 
 Among all the column offered by GDELT we, for now, chose to keep these columns:
 - EventCode
@@ -49,9 +49,13 @@ Among all the column offered by GDELT we, for now, chose to keep these columns:
 
 We refer to the cookbook provided by GDELT for more details on each columns: http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf
 
-Also we spent a significant amount of time to fetch information about which country a specific URL corresponds to as we cannot rely on GDELT to provide us with which country the news was written in. We currently achieve a very good accuracy but we are still trying to improve by alyways crawling the web for the missing datas. We are also trying to find a way to get the country of origin from news where we don't have the URLs but as these are in very inconsistent format and are nearly not present in the dataset, we omitted them for now.
+Also we spent a significant amount of time to fetch information about which country a specific URL corresponds to as we cannot rely on GDELT to provide us with which country the news was written in. We currently achieve a semi-satisfying accuracy but we are still trying to improve by alyways crawling the web for missing data. Indeed there are a tons of differents website in the time span 2015-2017 in the entire world! Some website are now dead, not referenced anymore, etc.. However we are pretty confident we can achieve an accuracy of nearly 100% in the coming days as we improve our fetching. We are also trying to find a way to get the country of origin from news where we don't have the URLs but as these are in very inconsistent format and are nearly not present in the dataset, we omitted them for now.
 
 With GDELT combined with the URL map we are now able to fully focus on the last bit of aggregation and then fully on vizualisation.
+
+# Dropped ideas
+
+Since we are now using GDELT 2.0 instead of 1.0, we only have the data since 2015 and not 1979, hence everything we planned by analyzing the spread overtime have now to be adapted accordingly. Even though we loose the ability to go that much back in time, we think that focusing on the 2015 onwards period is also very rich in its own as we now focus on the digital era and hence focus our analysis in the current period, hence being more actual. Basically we are more doing the job of analysts than the job of historians!
 
 # Questions for TAs (Milestone 2)
 
