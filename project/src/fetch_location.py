@@ -7,6 +7,13 @@ from shapely.geometry import shape, Point
 import pandas as pd
 
 def get_country_from_point(lat, long, js):
+    """Take a latitude, a longitude and a geojson and return the country associated to this coordinated according to the geojson
+    
+        Keyword arguments:
+        lat -- The latitude
+        long -- The longitude
+        js -- The geojson with countries of the world
+    """
     # construct point based on lon/lat returned by geocoder
     point = Point(long, lat)
 
@@ -19,7 +26,11 @@ def get_country_from_point(lat, long, js):
 
 
 def create_mapping(dataframe):
+    """This function
 
+        Keyword arguments:
+        dataframe -- The dataframe
+    """
     world_geo_path = '../data/locations/countries.geo.json'
     world_json_data = json.load(open(world_geo_path, encoding="UTF-8"))
 
@@ -37,6 +48,11 @@ def create_mapping(dataframe):
     return mapping
 
 def get_mapping(dataframe):
+    """This function
+
+        Keyword arguments:
+        dataframe -- The dataframe
+    """
     try:
         return pd.read_csv('../data/country_code_name.csv')
     except:
