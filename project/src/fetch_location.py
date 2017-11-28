@@ -26,7 +26,7 @@ def get_country_from_point(lat, long, js):
 
 
 def create_mapping(dataframe):
-    """This function
+    """Take a dataframe and outputs a mapping between the country code used and the country code convention CCA3 and stores it
 
         Keyword arguments:
         dataframe -- The dataframe
@@ -48,7 +48,7 @@ def create_mapping(dataframe):
     return mapping
 
 def get_mapping(dataframe):
-    """This function
+    """Fetches a dataframe and outputs a mapping between the country code used and the country code convention CCA3, creates it if necessary.
 
         Keyword arguments:
         dataframe -- The dataframe
