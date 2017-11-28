@@ -4,47 +4,30 @@ from fetch_gdelt_data import *
 from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_country_dict
 from fetch_location import get_mapping
 import re
-<<<<<<< HEAD
+
 import requests
 
-def clean_df(dataframe):
-    dataframe = dataframe[['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
+default_columns = ['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
                            'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
-                           'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']]
-    dataframe = dataframe.dropna(axis=0, how='any')
-    mapping = get_mapping(dataframe).set_index('ActionGeo_CountryCode')
-    dataframe['Country_Code'] = dataframe['ActionGeo_CountryCode'].apply(lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None')
+                           'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']
+
+def clean_df(df, selected_columns=default_columns):
+    df = df[selected_columns]
+    df = df.dropna(axis=0, how='any')
+    mapping = get_mapping(df).set_index('ActionGeo_CountryCode')
+    df['Country_Code'] = df['ActionGeo_CountryCode'].apply(lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None')
     
-    dataframe['SOURCEURL'] = dataframe['SOURCEURL'].apply(lambda x: clean_url(x))
-    dataframe['Country_Source'] = get_countries_for_dataframe(dataframe, 'SOURCEURL', get_all_newspapers_to_country_dict(), get_all_newspapers_to_country_dict())
+    df['SOURCEURL'] = df['SOURCEURL'].apply(lambda x: clean_url(x))
+    df['Country_Source'] = get_countries_for_dataframe(df, 'SOURCEURL', get_all_newspapers_to_country_dict(), get_all_newspapers_to_country_dict())
     
     r = requests.get('https://raw.githubusercontent.com/mledoze/countries/master/countries.json')
     d = {}
     for c in r.json():
         d[c['cca3']] = c['name']['common']
         
-    dataframe['Country_Name'] = dataframe['Country_Code'].apply(lambda x: d[x] if x in d else 'None')
+    df['Country_Name'] = df['Country_Code'].apply(lambda x: d[x] if x in d else 'None')
     
-    return dataframe
-=======
-
-default_column_names = [
-    'EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
-    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone','NumMentions', 'NumSources',
-    'NumArticles', 'ActionGeo_Type', 'Day'
-]
-
-def clean_df(df, column_names=default_column_names):
-    df = df[]
-    df = df.dropna(axis=0, how='any')
-    mapping = get_mapping(df).set_index('ActionGeo_CountryCode')
-    f = lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None'
-    df['Country_Code'] = df['ActionGeo_CountryCode'].apply(f)
-    df['Country_Source'] = get_countries_for_dataframe(
-        df, 'SOURCEURL', get_tld_to_country_dict(), get_all_newspapers_to_country_dict()
-    )
     return df
->>>>>>> a84a69830dd2624bb82d9454107e05fd3b983f66
 
 
 def clean_url(url):
