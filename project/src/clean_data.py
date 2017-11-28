@@ -6,20 +6,34 @@ from fetch_location import get_mapping
 import re
 
 
-def clean_df(dataframe):
+
+
+default_columns = ['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
+                           'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
+                           'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']
+
+def clean_df(df, selected_columns=default_columns):
     """Take a dataframe with GDELT2.0 data and only retain the useful columns for us and also add the country where the news was written
 
         Keyword arguments:
         df -- The dataframe complying to GDELT2.0 columns format
+        selected_columns (optionnal) -- The set of columns we want to keep
     """
-    dataframe = dataframe[['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
-                           'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
-                           'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']]
-    dataframe = dataframe.dropna(axis=0, how='any')
-    mapping = get_mapping(dataframe).set_index('ActionGeo_CountryCode')
-    dataframe['Country_Code'] = dataframe['ActionGeo_CountryCode'].apply(lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None')
-    dataframe['Country_Source'] = get_countries_for_dataframe(dataframe, 'SOURCEURL', get_tld_to_country_dict(), get_all_newspapers_to_country_dict())
-    return dataframe
+    df = df[selected_columns]
+    df = df.dropna(axis=0, how='any')
+    mapping = get_mapping(df).set_index('ActionGeo_CountryCode')
+    df['Country_Code'] = df['ActionGeo_CountryCode'].apply(lambda x: mapping.loc[x]['Country_Code']  if x in mapping['Country_Code'].index.values else 'None')
+    
+    df['Country_Source'] = get_countries_for_dataframe(df, 'SOURCEURL', get_all_newspapers_to_country_dict(), get_tld_to_country_dict())
+    
+    r = requests.get('https://raw.githubusercontent.com/mledoze/countries/master/countries.json')
+    d = {}
+    for c in r.json():
+        d[c['cca3']] = c['name']['common']
+        
+    df['Country_Name'] = df['Country_Code'].apply(lambda x: d[x] if x in d else 'None')
+    
+    return df
 
 def get_countries_for_dataframe(df, column_name, website_dict, tld_dict):
     """Take a dataframe and return the country associated to the url in the column_name column
