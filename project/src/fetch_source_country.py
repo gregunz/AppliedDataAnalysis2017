@@ -50,7 +50,6 @@ def get_all_newspapers_to_country_dict(v2=True):
                             if a_news_link is not None:
                                 #Check whether it links to a page of the website with more newspapers instead of a newspaper webstes
                                 if a_news_link[-3:] == 'htm' and a_news_link[:3] != 'htt' and a_news_link[:3] != 'www':
-                                    print(a_news)
                                     df = df.append(get_newspapers(base_url + a_news.get('href'), country_name))
                                 else:
                                     newspaper_name = a_news.text
@@ -67,7 +66,6 @@ def get_all_newspapers_to_country_dict(v2=True):
                 for a in countries:
                     #Get specific page
                     country_name = a.text
-                    print(country_name)
 
                     df = df.append(get_newspapers(base_url + a.get('href'), country_name))
 
@@ -76,6 +74,7 @@ def get_all_newspapers_to_country_dict(v2=True):
                 df.to_csv('../data/locations/no_duplicate_brute_newspapers_to_country_v2.csv', index=False)
             else:
                 if not os.path.isfile('../data_locations/no_duplicate_brute_newspapers_to_country_v2.csv'):
+                    print('hi2')
                     df = pd.read_csv('../data/locations/brute_newspapers_to_country_v2.csv')
                     df = df.drop_duplicates(subset=['Newspaper Url'], keep='first')
                     df.to_csv('../data/locations/no_duplicate_brute_newspapers_to_country_v2.csv', index=False)
