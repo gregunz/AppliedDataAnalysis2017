@@ -6,7 +6,8 @@ from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_
 
 default_columns = ['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
                    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
-                   'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']
+                   'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type',
+cleaned_columns = default_columns + ['Country_Code', 'Country_Source', 'Country_Name'] 'Day']
 
 
 def clean_df(df, selected_columns=default_columns):
