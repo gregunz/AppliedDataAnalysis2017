@@ -1,10 +1,9 @@
 # -*- coding: utf-8 -*-
-from socket import getaddrinfo
-import requests
 import json
-import re
-from shapely.geometry import shape, Point
+
 import pandas as pd
+from shapely.geometry import shape, Point
+
 
 def get_country_from_point(lat, long, js):
     """Take a latitude, a longitude and a geojson and return the country associated to this coordinated according to the geojson
@@ -34,18 +33,24 @@ def create_mapping(dataframe):
     world_geo_path = '../data/locations/countries.geo.json'
     world_json_data = json.load(open(world_geo_path, encoding="UTF-8"))
 
-    positions = dataframe[['ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long']].groupby(['ActionGeo_Lat', 'ActionGeo_Long']).agg(lambda x: x.mode()).reset_index()
-    positions["Lat_Long"] = positions['ActionGeo_Lat'].map(float).map('{:,.2f}'.format).map(str) + ' , '+ positions['ActionGeo_Long'].map(float).map('{:,.2f}'.format).map(str)
+    positions = dataframe[['ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long']].groupby(
+        ['ActionGeo_Lat', 'ActionGeo_Long']).agg(lambda x: x.mode()).reset_index()
+    positions["Lat_Long"] = positions['ActionGeo_Lat'].map(float).map('{:,.2f}'.format).map(str) + ' , ' + positions[
+        'ActionGeo_Long'].map(float).map('{:,.2f}'.format).map(str)
     positions = positions.drop_duplicates(subset=['Lat_Long'], keep=False)
-    positions['ActionGeo_CountryCode'] = positions['ActionGeo_CountryCode'].apply(lambda x: x[0] if not type(x) is str else x)
-    positions['Country_Code'] = positions['Lat_Long'].apply(lambda x: get_country_from_point(float(x.split(',')[0]), float(x.split(',')[1]), world_json_data))
+    positions['ActionGeo_CountryCode'] = positions['ActionGeo_CountryCode'].apply(
+        lambda x: x[0] if not type(x) is str else x)
+    positions['Country_Code'] = positions['Lat_Long'].apply(
+        lambda x: get_country_from_point(float(x.split(',')[0]), float(x.split(',')[1]), world_json_data))
     positions = positions[positions['Country_Code'] != 'None']
 
-    mapping = positions[['ActionGeo_CountryCode', 'Country_Code']].groupby('ActionGeo_CountryCode').agg(lambda x: x.mode()[0])
+    mapping = positions[['ActionGeo_CountryCode', 'Country_Code']].groupby('ActionGeo_CountryCode').agg(
+        lambda x: x.mode()[0])
 
     mapping.to_csv('../data/country_code_name.csv')
 
     return mapping
+
 
 def get_mapping(dataframe):
     """Fetches a dataframe and outputs a mapping between the country code used and the country code convention CCA3, creates it if necessary.

@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 
-import io
-import requests
 import datetime
-import zipfile
-import pandas as pd
+import io
 import os
+import zipfile
+
+import pandas as pd
+import requests
 
 data_directory = "../data"
 gdelt_directory = "{}/gdelt".format(data_directory)
@@ -65,7 +66,7 @@ def create_df(path_or_buffer, v='2'):
     column_names = load_column_names(v=v)
     return pd.read_csv(
         path_or_buffer, sep="\t", header=None, usecols=range(len(column_names)),
-        names=column_names, index_col=0, dtype={'EventCode':'object'}
+        names=column_names, index_col=0, dtype={'EventCode': 'object'}
     )
 
 
@@ -108,7 +109,11 @@ def download_df(date, translingual=False, should_save=True, v='2'):
             if should_save:
                 z.extract(filename, gdelt_directory)
             dfs.append(create_df(z.open(filename), v=v))
-    return pd.concat(dfs)
+
+    if len(dfs) == 0:
+        return pd.DataFrame(columns=load_column_names(v=v))
+    else:
+        return pd.concat(dfs)
 
 
 def fetch_df(from_date, to_date=None, translingual=False, should_save=True, v='2'):
