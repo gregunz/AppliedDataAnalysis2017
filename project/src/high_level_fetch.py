@@ -56,29 +56,6 @@ def get_cleaned_country(country):
         country -- The desired country
     """
     df = pd.DataFrame(columns=default_columns)
-    for y in range(min_year, max_year + 1):
-        df = df.append(get_cleaned_year(y, country))
-
-
-def get_cleaned_separate_month(start_month, start_year, end_month, end_year, country="none"):
-    """ This function fetch the data of a period, clean them and return them as a dataframe where the month of each news is specified
-
-        Keyword arguments:
-        start_month -- The starting month
-        start_year -- The starting year
-        end_month -- The ending month (including)
-        end_year -- The ending year (including)
-        country -- (Optional) Fetch only the data of a specific country
-    """
-    df = pd.DataFrame(columns=default_columns + ['Month'])
-
-    for y in range(start_year, end_year + 1):
-        if y == end_year:
-            end_m = end_month
-        else:
-            end_m = 12
-
-        for m in range(start_month, end_month + 1):
-            df_m = get_cleaned_month(m, y, country)
+    for y in range(min_year, max_year th(m, y, country)
             df_m['Month'] = m
             df = df.append(df_m)
