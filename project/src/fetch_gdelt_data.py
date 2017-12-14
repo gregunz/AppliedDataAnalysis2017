@@ -66,7 +66,7 @@ def create_df(path_or_buffer, v='2'):
     column_names = load_column_names(v=v)
     return pd.read_csv(
         path_or_buffer, sep="\t", header=None, usecols=range(len(column_names)),
-        names=column_names, index_col=0, dtype={'EventCode': 'object'}
+        names=column_names, index_col=0, dtype={'EventCode': 'object'}, encoding='utf-8'
     )
 
 

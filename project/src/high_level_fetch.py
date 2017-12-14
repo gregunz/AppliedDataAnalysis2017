@@ -17,14 +17,14 @@ def get_cleaned_month(month, year, country="none"):
         year -- The desired year
         country -- (Optional) Fetch only the data of a specific country
     """
-    assert (year >= min_year & year < max_year), "Year not in range"
-    assert (month >= 0 & month <= 12), "Month not in range"
+    assert year >= min_year & year < max_year, "Year not in range"
+    assert month >= 0 & month <= 12, "Month not in range"
     start = datetime.date(year, month, 1)
     end = datetime.date(year + (month // 12), month % 12 + 1, 1)
 
     df = fetch_df(start, end, translingual=True)
     clean = clean_df(df)
-    if (country != "none"):
+    if country != "none":
         return clean[clean["Country_Source"] == country]
     else:
         return clean
@@ -43,7 +43,7 @@ def get_cleaned_year(year, country="none"):
     df = fetch_df(start, end, translingual=True)
     clean = clean_df(df)
 
-    if (country != "none"):
+    if country != "none":
         return clean[clean["Country_Source"] == country]
     else:
         return clean

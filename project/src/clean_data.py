@@ -60,7 +60,7 @@ def get_countries_for_dataframe(df, column_name, website_dict, tld_dict):
 
         url_pair = re.findall(r'\b(?!www\.)([a-zA-Z0-9-]+(\.[a-z]+)+)', url)
 
-        if (url_pair == []):  # If it is not a url
+        if len(url_pair) == 0:  # If it is not a url
             return 'NOWEBSITE'
         else:
             url_pair = url_pair[0]
