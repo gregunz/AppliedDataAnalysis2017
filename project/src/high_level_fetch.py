@@ -20,7 +20,7 @@ def get_cleaned_month(month, year, country="none"):
     assert (year >= min_year & year < max_year), "Year not in range"
     assert (month >= 0 & month <= 12), "Month not in range"
     start = datetime.date(year, month, 1)
-    end = datetime.date(year + (month // 12), (month + 1) % 12, 1)
+    end = datetime.date(year + (month // 12), month % 12 + 1, 1)
 
     df = fetch_df(start, end, translingual=True)
     clean = clean_df(df)
@@ -56,6 +56,5 @@ def get_cleaned_country(country):
         country -- The desired country
     """
     df = pd.DataFrame(columns=default_columns)
-    for y in range(min_year, max_year th(m, y, country)
-            df_m['Month'] = m
-            df = df.append(df_m)
+    for y in range(min_year, max_year + 1):
+        df = df.append(get_cleaned_year(y, country))
