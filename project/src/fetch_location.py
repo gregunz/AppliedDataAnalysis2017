@@ -4,7 +4,6 @@ import json
 import pandas as pd
 from shapely.geometry import shape, Point
 
-
 def get_country_from_point(lat, long, js):
     """Take a latitude, a longitude and a geojson and return the country associated to this coordinated according to the geojson
     

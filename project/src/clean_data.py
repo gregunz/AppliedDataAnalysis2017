@@ -1,18 +1,96 @@
 import re
+import pandas as pd
+import datetime
+import unidecode
 
 from fetch_gdelt_data import *
 from fetch_location import get_mapping
 from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_country_dict
+from tqdm import tqdm_notebook as tqdm
+from pycountry_convert import country_name_to_country_alpha3
 
 default_columns = ['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
                    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
-                   'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day',
-                   'Country_Code', 'Country_Source', 'Country_Name']
-                   
-def get_cleaned_columns_name():
-    c = default_columns + ['Country_Code', 'Country_Source', 'Country_Name']
-    del c[1]
+                   'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']
+
+
+cleaned_columns = ['EventCode', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
+                    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
+                    'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type',
+                    'Day','Country_Code', 'Country_Source', 'Country_Name']
+
+
+def country_to_cca3(c, dict_):
+    """ This function convert a country name to its ISO 3166-1 alpha-3 code
+
+         Keyword arguments:
+         c -- The country name to convert
+         dict -- The dicitonnary create by the function get_dict_countries_to_cca3() also stored in dict_countries_to_cca3
+    """
+    countries_to_discard = [
+        'Near and Middle East Regional',
+        'Caribbean Regional',
+        'Asia Regional',
+        'International',
+        'Europe Regional',
+        'Central Africa Republic',
+        'Africa Regional',
+        'Americas Regional',
+        'Central America Regional',
+        'United Nations',
+        'Latin America',
+        'NOWEBSITE',
+        'NOENTRY',
+    ]
+
+    c = c.strip()
+    if c in countries_to_discard:
+        return 'DISCARDED'
+    try:
+        c = dict_[c]
+    except KeyError:
+        try:
+            c = country_name_to_country_alpha3(c)
+        except KeyError as e:
+            no_accent = unidecode.unidecode(c)
+            if c == no_accent:
+                raise e
+            else:
+                return country_to_cca3(no_accent, dict_)
     return c
+
+
+def get_dict_countries_to_cca3():
+    """ This function return a dict: a country name to its ISO 3166-1 alpha-3 code
+    """
+
+    r = requests.get('https://raw.githubusercontent.com/mledoze/countries/master/countries.json')
+
+    dict_ = dict([(c['name']['common'], c['cca3']) for c in r.json()])
+
+    mismatches = [
+        ('Holy See', 'Vatican City'),
+        ('Wallis and Futuna Islands', 'Wallis and Futuna'),
+        ('Reunion', 'Réunion'),
+        ('Congo Kinshasa', 'Congo'),
+        ('Timor Leste', 'Timor-Leste'),
+        ('Congo Brazzaville', 'Congo'),
+        ('Dutch Caribbean', 'Netherlands'),
+        ('Cote d\'Ivoire', 'Côte d\'Ivoire'),
+        ('Curacao', 'Curaçao'),
+        ('Svalbard and Jan Mayen Islands', 'Norway'),
+        ('Faeroe Islands', 'Faroe Islands'),
+        ('Guinea Bissau', 'Guinea-Bissau')
+    ]
+
+    for new_c, to_c in mismatches:
+        dict_[new_c] = country_to_cca3(to_c, dict_)
+
+    return dict_
+    
+
+dict_countries_to_cca3 = get_dict_countries_to_cca3()
+
 
 
 def clean_df(df, selected_columns=default_columns):
@@ -38,7 +116,7 @@ def clean_df(df, selected_columns=default_columns):
 
     df['Country_Name'] = df['Country_Code'].apply(lambda x: d[x] if x in d else 'None')
 
-    return df
+    return df[cleaned_columns]
 
 
 def get_countries_for_dataframe(df, column_name, website_dict, tld_dict):
