@@ -1,23 +1,20 @@
 import re
-import pandas as pd
-import datetime
+
 import unidecode
+from pycountry_convert import country_name_to_country_alpha3
 
 from fetch_gdelt_data import *
 from fetch_location import get_mapping
 from fetch_source_country import get_tld_to_country_dict, get_all_newspapers_to_country_dict
-from tqdm import tqdm_notebook as tqdm
-from pycountry_convert import country_name_to_country_alpha3
 
 default_columns = ['EventCode', 'SOURCEURL', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
                    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
                    'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type', 'Day']
 
-
 cleaned_columns = ['EventCode', 'ActionGeo_CountryCode', 'ActionGeo_Lat', 'ActionGeo_Long',
-                    'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
-                    'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type',
-                    'Day','Country_Code', 'Country_Source', 'Country_Name']
+                   'IsRootEvent', 'QuadClass', 'GoldsteinScale', 'AvgTone',
+                   'NumMentions', 'NumSources', 'NumArticles', 'ActionGeo_Type',
+                   'Day', 'Country_Code', 'Country_Source', 'Country_Name']
 
 
 def country_to_cca3(c, dict_):
@@ -87,10 +84,9 @@ def get_dict_countries_to_cca3():
         dict_[new_c] = country_to_cca3(to_c, dict_)
 
     return dict_
-    
+
 
 dict_countries_to_cca3 = get_dict_countries_to_cca3()
-
 
 
 def clean_df(df, selected_columns=default_columns):
