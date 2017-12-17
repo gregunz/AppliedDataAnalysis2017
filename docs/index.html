@@ -55,11 +55,39 @@
     </div>
   </section>
 
-  ​
+  ​<section id="two" class="wrapper style1">
+    <div class="container">
+      <header class="major special">
+        <h2>Data processing</h2>
+        <p>From raw data to cleaned data</p>
+      </header>
+    </div>
+    <div class="6u$ 12u$(medium)" id="tester">
+      <p>From the raw data of GDELT, the main challenge is finding the "source country" from a website URL. </br>
+        Our first idea is to look at the TLD (top level domain) of each URL and match the source with the corresponding country. This is easy to implement, however, most of the events are still not matched because the TLD of their URL does not correspond to a specific country (.com, .org, and so on...).</br>
+        Since this idea doesn't work properly, we look online for a mapping that would have already been done. After finding, scraping and trying on a few, we decide to use the data provided by http://www.abyznewslinks.com which is more up to date and complete than the others.</br>
+        But then still, even by combining the mapping from the TLD and the
+        one scraped online, around 20% of the sources are left unmatched.
+      </p>
+      <p>
+        <b>"insert graph of most common countries here"</b>
+      </p>
+      <p>
+        Upon inspection, we find that the unmatched sources are sources that are not affiliated with a specific country and have a more international root. Therefore, we decide to discard them.
+      </p>
+      <p>
+        <b>"insert graph of most common unmatched website here"</b>
+      </p>
+      <p>
+        Almost no operation needs to be done to get the "target country" because it is contained in the raw data in the FIPS 10-4 standard. As this standard is not common in GeoJson files, we convert it to the ISO 3166-1 alpha-3 standard, one of the most common.
+      </p>
+
+    </div>
+  </section>
 
 
   <!-- Two -->
-  <section id="two" class="wrapper style2 special">
+  <section id="three" class="wrapper style2 special">
     <header class="major">
       <h2>Viz</h2>
       <p>Here is our visualisation</p>
