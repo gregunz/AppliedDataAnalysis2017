@@ -1,20 +1,29 @@
-def world_map_figure(frames_title, df, locations_col, txt_fn, zmin, zmax, colorscale):
+def world_map_figure(title,
+                     title_colorscale,
+                     frames_title,
+                     df,
+                     locations_col,
+                     txt_fn,
+                     zmin,
+                     zmax,
+                     colorscale,
+                     showscale=True):
     figure = {
-        'data': world_map_data(zmin, zmax, colorscale),
-        'layout': world_map_layout(frames_title),
+        'data': world_map_data(title_colorscale, zmin, zmax, colorscale, showscale),
+        'layout': world_map_layout(title, frames_title),
         'frames': world_map_frames(frames_title, df, locations_col, txt_fn)
     }
     return figure
 
 
-def world_map_layout(frames_title):
+def world_map_layout(title, frames_title):
     sliders_dict = {
         'active': 0,
         'yanchor': 'top',
         'xanchor': 'left',
         'currentvalue': {
             'font': {'size': 20},
-            'prefix': 'Date: ',
+            'prefix': '',
             'visible': True,
             'xanchor': 'right'
         },
@@ -43,13 +52,18 @@ def world_map_layout(frames_title):
         sliders_dict['steps'].append(slider_step)
 
     layout = {
-        'title': 'Average Tone Evolution',
+        'title': title,
+        'width': 1080,
+        'height': 720,
         'geo': {
-            'showframe': False,
+            'showframe': True,
             'showcoastlines': False,
+            'showland': True,
+            'landcolor': 'gray',
             'projection': {
                 'type': 'Mercator'
-            }
+            },
+            'bgcolor': 'rgba(0, 0, 0, 0)',
         },
         'sliders': [sliders_dict],
         'updatemenus': [{
@@ -75,18 +89,21 @@ def world_map_layout(frames_title):
             'x': 0.1,
             'xanchor': 'right',
             'y': 0,
-            'yanchor': 'top'
+            'yanchor': 'top',
         }],
+        'paper_bgcolor': 'rgba(0, 0, 0, 0)',
+        'plot_bgcolor': 'rgba(0, 0, 0, 0)',
     }
 
     return layout
 
 
-def world_map_data(zmin, zmax, colorscale):
+def world_map_data(title_colorscale, zmin, zmax, colorscale, showscale=True):
     data = [{
         'type': 'choropleth',
         'zmin': zmin,
         'zmax': zmax,
+        'showscale': showscale,
         'colorscale': colorscale,
         'reversescale': False,
         'marker': {
@@ -96,7 +113,7 @@ def world_map_data(zmin, zmax, colorscale):
             }
         },
         'colorbar': {
-            'title': 'AvgTone Mean'
+            'title': title_colorscale
         },
     }]
     return data
