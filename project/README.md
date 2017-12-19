@@ -1,7 +1,55 @@
-## How do conflicts propagate through media depending on their geolocation
+# **The world through the news**
+
 # Abstract
-As an individual, it is really hard to grasp a broad view of our world. Each media usually focuses on news influenced by its geolocation, political orientation, public of interest or many other variables. Hence, they all provide a biased representation of the world. By merging them altogether, we are able to get a more accurate and authentic view. Using GDELT Project, such diversity of media sources is available, it is focused on conflicts and it aggregates data from all around the world. Those datasets enable us to quantify and visualize the distribution of conflictual events by regions and patterns. By making use of such rich datasets, we attempt to show the spread of specific news and compare it between regions or types.
+
+As an individual, it is really hard to grasp a broad view of our world. Each media usually focuses on news influenced by its geolocation, political orientation, public of interest or many other variables. Hence, they all provide a biased representation of the world. By merging them altogether, we are able to get a more accurate and authentic view. Using GDELT Project, such diversity of media sources is available, it is focused on conflicts and it aggregates data from all around the world. Those datasets enable us to quantify and visualize the distribution of conflictual events by regions and patterns. We attempt to use those bias in our favor to show differences between countries
+
 # Research questions
+
+1. How is the distribution of conflictual events in the different regions of the world ?
+1. Are there inequalities between those regions regarded to any event’s type or to their coverage by the media ?
+1. Are some countries more prone to media bias than others (e.g some events might have a high coverage (many articles) depending on where they occur) ?
+1. Can we show how information about a particular event spread on the map ?
+1. How does it evolve throughout time ? (e.g. with internet, information travel quicker and broader)
+
+# Dataset
+
+We use GDELT 2.0 Translingual.
+
+Among all the column offered by GDELT we, choose to keep these columns:
+- EventCode
+- SOURCEURL
+- ActionGeo_CountryCode
+- ActionGeo_Lat
+- ActionGeo_Long
+- IsRootEvent
+- QuadClass
+- GoldsteinScale
+- AvgTone
+- NumMentions
+- NumSources
+- NumArticles
+- ActionGeo_Type
+- Day
+
+We refer to the cookbook provided by GDELT for more details on each columns: http://data.gdeltproject.org/documentation/GDELT-Event_Codebook-V2.0.pdf
+
+Also we spent a significant amount of time to fetch information about which country a specific URL corresponds to as we cannot rely on GDELT to provide us with which country the news was written in. We currently achieve a satisfying accuracy of 77%, the 23% left being mostly international website or non website, hence sources that do not interess us.
+
+# Contributions
+- **Bryan Abate:** Data cleaning, source country fetching, .py files cleaning, website
+- **Grégoire Clément:** Data cleaning, TLD fetching, GDELT data fetching, vizualisation, website
+- **Maxime Delisle** Data cleaning, locations fetching, vizualisation
+
+Everyone will work on the final presentation
+# Archives
+Below you can find previous sections of the readme for previous milestone we still consider important but take too much visibility above.
+
+## Milestone 2
+
+### Abstract
+As an individual, it is really hard to grasp a broad view of our world. Each media usually focuses on news influenced by its geolocation, political orientation, public of interest or many other variables. Hence, they all provide a biased representation of the world. By merging them altogether, we are able to get a more accurate and authentic view. Using GDELT Project, such diversity of media sources is available, it is focused on conflicts and it aggregates data from all around the world. Those datasets enable us to quantify and visualize the distribution of conflictual events by regions and patterns. By making use of such rich datasets, we attempt to show the spread of specific news and compare it between regions or types.
+### Research questions
 We wish to answer the following questions:
 
 1. How is the distribution of conflictual events in the different regions of the world ?
@@ -13,7 +61,7 @@ We wish to answer the following questions:
 
 *will depend on results and progress of previous questions
 
-# Update on research question
+### Update on research question
 After data acquisition, the questions we wished to answer were updated as follows:
 1. The data we have gathered allows perfectly to answer to this question, we still have to complete our map of (newspaper URL) -> Country, but overall we are already able to draw sankey diagrams, bubble maps and heatmaps for different distribution of conflictual events such as:
     - Which countries a specific countries talk the most about
@@ -25,7 +73,7 @@ After data acquisition, the questions we wished to answer were updated as follow
 1. Again as for question 1 and 2, our current state already allows to do that, we haven't done it yet as it is more a matter of vizualisation.
 1. Same as for 4.
 
-# Dataset
+### Dataset
 
 **Update from Milestone 1**
 
@@ -53,14 +101,12 @@ Also we spent a significant amount of time to fetch information about which coun
 
 With GDELT combined with the URL map we are now able to fully focus on the last bit of aggregation and then fully on vizualisation.
 
-# Dropped ideas
+### Dropped ideas
 
 Since we are now using GDELT 2.0 instead of 1.0, we only have the data since 2015 and not 1979, hence everything we planned by analyzing the spread overtime have now to be adapted accordingly. Even though we loose the ability to go that much back in time, we think that focusing on the 2015 onwards period is also very rich in its own as we now focus on the digital era and hence focus our analysis in the current period, hence being more actual. Basically we are more doing the job of analysts than the job of historians!
 
-# Questions for TAs (Milestone 2)
+### Questions for TAs (Milestone 2)
 
-# Archives
-Below you can find previous sections of the readme for previous milestone we still consider important but take too much visibility above.
 
 ## Milestone 1
 
